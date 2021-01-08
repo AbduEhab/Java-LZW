@@ -1,8 +1,8 @@
 import java.util.HashMap;
 
-public class Encoder {
+public class Decoder {
 
-    public static String encode(String encodingSequence) {
+    public static String decode(String decodingSequence) {
 
         HashMap<String, String> directory = new HashMap<String, String>();
         String buffer = "";
@@ -12,23 +12,23 @@ public class Encoder {
 
         boolean repeatedSequence = false;
 
-        for (int i = currIndex; i < encodingSequence.length(); i++) {
-            buffer += encodingSequence.charAt(i);
+        for (int i = currIndex; i < decodingSequence.length(); i++) {
+            buffer += decodingSequence.charAt(i);
 
             if (i == 0) {
-                directory.put(buffer, Integer.toBinaryString(storedValues++));
+                directory.put(Integer.toBinaryString(storedValues++), buffer);
                 // output += directory.get(Integer.toBinaryString(storedValues - 1));
                 output += buffer;
                 buffer = "";
                 continue;
             }
 
-            if (i == encodingSequence.length() - 1) {
+            if (i == decodingSequence.length() - 1) {
                 if (directory.containsKey(buffer)) {
                     output += directory.get(buffer);
                 } else {
-                    output += directory.get(buffer.substring(0, buffer.length() - 1))
-                            + (buffer.charAt(buffer.length() - 1) + "");
+                    String decodedSegment = directory.get(buffer.substring(0, buffer.length() - 1)) + "";
+                    output += decodedSegment + buffer.charAt(buffer.length() - 1);
                 }
                 break;
             }
@@ -37,10 +37,11 @@ public class Encoder {
                 if (directory.containsKey(buffer)) {
                     continue;
                 } else {
-                    directory.put(buffer, Integer.toBinaryString(storedValues++));
                     // output += directory.get(Integer.toBinaryString(storedValues - 1));
-                    output += directory.get(buffer.substring(0, buffer.length() - 1))
-                            + (buffer.charAt(buffer.length() - 1) + "");
+                    String decodedSegment = directory.get(buffer.substring(0, buffer.length() - 1)) + ""
+                            + buffer.charAt(buffer.length() - 1);
+                    directory.put(Integer.toBinaryString(storedValues++), decodedSegment);
+                    output += decodedSegment;
                     buffer = "";
                     repeatedSequence = false;
                 }
@@ -49,7 +50,7 @@ public class Encoder {
                     repeatedSequence = true;
                     continue;
                 } else {
-                    directory.put(buffer, Integer.toBinaryString(storedValues++));
+                    directory.put(Integer.toBinaryString(storedValues++), buffer);
                     // output += directory.get(Integer.toBinaryString(storedValues - 1));
                     output += buffer;
                     buffer = "";
@@ -60,7 +61,7 @@ public class Encoder {
         return output;
     }
 
-    public static String encode(int encodingSequence) {
-        return encode(encodingSequence + "");
+    public static String decode(int decodingSequence) {
+        return decode(decodingSequence + "");
     }
 }
