@@ -2,82 +2,6 @@ import java.util.HashMap;
 
 public class Encoder {
 
-    // public static String encodeBinary(String encodingSequence) {
-
-    // HashMap<String, String> directory = new HashMap<String, String>();
-    // String buffer = "";
-    // String output = "";
-    // int storedValues = 0;
-
-    // boolean repeatedSequence = false;
-
-    // String[] byteString = new String[encodingSequence.length() / 8];
-
-    // for (int i = 0; i < byteString.length; i++) {
-    // byteString[i] = "";
-    // }
-
-    // for (int i = 0, j = 0; i < encodingSequence.length(); i++) {
-    // if (i != 0 && i % 8 == 0)
-    // j++;
-
-    // byteString[j] += encodingSequence.charAt(i) + "";
-    // }
-
-    // for (int i = 0; i < encodingSequence.length() / 8; i++) {
-    // buffer += byteString[i];
-
-    // if (i == 0) {
-    // directory.put(buffer, Integer.toBinaryString(storedValues++));
-    // // output += directory.get(Integer.toBinaryString(storedValues - 1));
-    // output += buffer;
-    // buffer = "";
-    // continue;
-    // }
-
-    // if (i == (encodingSequence.length() / 8) - 1) {
-    // if (directory.containsKey(buffer)) {
-    // output += directory.get(buffer);
-    // } else {
-    // if (buffer.length() != 8)
-    // output += directory.get(buffer.substring(0, buffer.length() - 8))
-    // + buffer.substring(buffer.length() - 9, buffer.length() - 1);
-    // else
-    // output += buffer;
-    // }
-    // break;
-    // }
-
-    // if (repeatedSequence) {
-    // if (directory.containsKey(buffer)) {
-    // continue;
-    // } else {
-    // directory.put(buffer, Integer.toBinaryString(storedValues++));
-    // // output += directory.get(Integer.toBinaryString(storedValues - 1));
-    // output += directory.get(buffer.substring(0, buffer.length() - 8))
-    // + buffer.substring(buffer.length() - 9, buffer.length() - 1);
-    // buffer = "";
-    // repeatedSequence = false;
-    // }
-    // } else {
-    // if (directory.containsKey(buffer)) {
-    // repeatedSequence = true;
-    // continue;
-    // } else {
-
-    // // if (buffer.equals(Integer.toBinaryString(storedValues++)))
-
-    // directory.put(buffer, Integer.toBinaryString(storedValues++));
-    // // output += directory.get(Integer.toBinaryString(storedValues - 1));
-    // output += buffer;
-    // buffer = "";
-    // }
-    // }
-
-    // }
-    // return output;
-    // }
-
     public static String encodeBinary(String encodingSequence) {
 
         // String temp = "";
@@ -97,17 +21,6 @@ public class Encoder {
         int inputBits = encodingSequence.length();
         String extraBits = "0";
 
-        if (inputBits > 2048) {
-            storedValues = storedValues * 2;
-            basevalue = storedValues;
-            extraBits += "0";
-        }
-        if (inputBits > 4096) {
-            storedValues = storedValues * 2;
-            basevalue = storedValues;
-            extraBits += "0";
-        }
-
         boolean repeatedSequence = false;
 
         String[] byteString = new String[encodingSequence.length() / 8];
@@ -123,7 +36,7 @@ public class Encoder {
             byteString[j] += encodingSequence.charAt(i) + "";
         }
 
-        for (int i = 0; i < encodingSequence.length() / 8; i++) {
+        for (int i = 0; i < byteString.length; i++) {
 
             if (!(storedValues > basevalue * 2)) {
 
@@ -140,7 +53,7 @@ public class Encoder {
                     continue;
                 }
 
-                if (i == (encodingSequence.length() / 8) - 1) {
+                if (i == (byteString.length) - 1) {
                     if (directory.containsKey(buffer)) {
                         output += directory.get(buffer);
                     } else {
