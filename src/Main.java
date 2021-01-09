@@ -3,15 +3,6 @@ public class Main {
 
         String code = "011101000110100001101001011100110110100101110011011101000110100001100101";
 
-        // String temp = "";
-
-        // for (int i = 0; i < code.length(); i++) {
-        //     if (code.charAt(i) != ' ')
-        //         temp += "" + code.charAt(i);
-        // }
-
-        // code = temp;
-
         System.out.println("\nCode:\t\t" + code + " - " + code.length() + " Bits\n");
 
         String encodedCode = Encoder.encodeBinary(code);
