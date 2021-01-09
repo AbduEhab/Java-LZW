@@ -1,14 +1,26 @@
-## Getting Started
+## Overview
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+- This is the java implementation of the `LZW Compression and Decompression` algorithm.
 
-## Folder Structure
+- I wrote this code to help me implement the algorithm in `VHDL` but I decided to post it as to help people who might have an intrest in algorithm understand it better or for people who need it to simply use it.
 
-The workspace contains two folders by default, where:
+- To make it easier for people new to java, I wrote the methods in 2 seperate classes as `static` methods.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+>I might add an implementation of the LZ77 algorithm sometime in the future. If you want me to prioritize it, message me.
 
-## Dependency Management
+---
+## Technologies
 
-The `JAVA DEPENDENCIES` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-pack/blob/master/release-notes/v0.9.0.md#work-with-jar-files-directly).
+- `JAVA SE 15`
+
+---
+## Setup
+
+- Download the `Java SDK` from oracle or from your linux repository.
+- Import the `Encoder` and the `Decoder` files into your project or simply clone this Repo.
+
+---
+## Usage
+
+- Prepare the sequence to be Encodded by transforming it to a binary sequence. (do so however you wish!)
+- Call the Classes' respective methods and utilize its effectiveness!
